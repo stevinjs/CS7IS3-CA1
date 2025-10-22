@@ -9,6 +9,7 @@ import org.apache.lucene.store.Directory;
 
 import java.io.*;
 import java.nio.file.Paths;
+package com.example;
 
 public class Indexer {
     public static void main(String[] args) throws Exception {

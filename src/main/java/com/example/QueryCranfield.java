@@ -11,6 +11,7 @@ import org.apache.lucene.store.FSDirectory;
 import java.io.*;
 import java.nio.file.Paths;
 
+package com.example;
 public class QueryCranfield {
     public static void main(String[] args) throws Exception {
         String queriesPath = "./cran.qry";        // Path to your cran.qry file
