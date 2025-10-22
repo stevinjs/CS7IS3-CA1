@@ -13,8 +13,8 @@ import java.nio.file.Paths;
 
 public class QueryCranfield {
     public static void main(String[] args) throws Exception {
-        String queriesPath = "cran.qry";        // Path to your cran.qry file
-        String indexDir = "index";              // Path to your Lucene index
+        String queriesPath = "./cran.qry";        // Path to your cran.qry file
+        String indexDir = "./index";              // Path to your Lucene index
         String outputPath = "results.txt";      // Output file for TREC eval
 
         IndexReader reader = DirectoryReader.open(FSDirectory.open(Paths.get(indexDir)));
