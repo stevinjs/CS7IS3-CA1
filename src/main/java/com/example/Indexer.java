@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 
 public class Indexer {
     public static void main(String[] args) throws Exception {
-        String cranFilePath = "cran.all.1400"; // path to dataset
+        String cranFilePath = "./cran.all.1400"; // path to dataset
         String indexDir = "index";             // output index directory
 
         Directory dir = FSDirectory.open(Paths.get(indexDir));
