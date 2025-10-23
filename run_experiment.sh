@@ -3,7 +3,7 @@
 # Set these to your actual data file paths
 CRAN_DOCS="./resources/cran.all.1400"
 CRAN_QRY="./resources/cran.qry"
-CRAN_QREL="./resources/cranqrel_nospaces"
+CRAN_QREL="./resources/qrel"
 TREC_EVAL="./trec_eval-9.0.7/trec_eval" # Adjust if trec_eval binary elsewhere
 
 # List analyzers (must match your Java switch statement)
