@@ -11,8 +11,8 @@ ANALYZERS=(standard english simple whitespace)
 
 for ANALYZER in "${ANALYZERS[@]}"; do
     echo "==== Testing Analyzer: $ANALYZER ===="
-    INDEX_DIR="/home/azureuser/ca1/CS7IS3-CA1/index_$ANALYZER"
-    RESULTS="/home/azureuser/ca1/CS7IS3-CA1/results/results_$ANALYZER.txt"
+    INDEX_DIR="./indexes/index_$ANALYZER"
+    RESULTS="./results/results_$ANALYZER.txt"
     METRICS="metrics_$ANALYZER.txt"
 
     # (Re-)Index documents using selected analyzer
