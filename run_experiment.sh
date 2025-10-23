@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Set these to your actual data file paths
-CRAN_DOCS="/home/azureuser/ca1/CS7IS3-CA1/resources/cran.all.1400"
-CRAN_QRY="/home/azureuser/ca1/CS7IS3-CA1/resources/cran.qry"
-CRAN_QREL="/home/azureuser/ca1/CS7IS3-CA1/resources/cranqrel_clean"
-TREC_EVAL="/home/azureuser/ca1/CS7IS3-CA1/trec_eval-9.0.7/trec_eval" # Adjust if trec_eval binary elsewhere
+CRAN_DOCS="./resources/cran.all.1400"
+CRAN_QRY="./resources/cran.qry"
+CRAN_QREL="./resources/cranqrel_clean"
+TREC_EVAL="./trec_eval-9.0.7/trec_eval" # Adjust if trec_eval binary elsewhere
 
 # List analyzers (must match your Java switch statement)
 ANALYZERS=(standard english simple whitespace)
