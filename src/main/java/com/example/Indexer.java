@@ -8,6 +8,11 @@ import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.document.*;
 import org.apache.lucene.index.*;
 import org.apache.lucene.store.FSDirectory;
+import org.apache.lucene.search.similarities.Similarity;
+import org.apache.lucene.search.similarities.BM25Similarity;
+import org.apache.lucene.search.similarities.ClassicSimilarity;
+import org.apache.lucene.search.similarities.BooleanSimilarity;
+
 
 import java.io.*;
 import java.nio.file.Paths;
