@@ -19,13 +19,8 @@ public class CustomAnalyzer extends Analyzer {
     @Override
     protected TokenStreamComponents createComponents(String fieldName) {
         Tokenizer source = new StandardTokenizer();
+
         TokenStream filter = new LowerCaseFilter(source);
-        filter = new EnglishPossessiveFilter(filter);
-
-        // Extend standard stopwords with science-specific noise words
-        CharArraySet stopSet = new CharArraySet(EnglishAnalyzer.getDefaultStopSet(), true);
-        stopSet.addAll(Arrays.asList("et", "al", "study", "results", "based", "shown"));
-
         filter = new EnglishPossessiveFilter(filter);
         filter = new StopFilter(filter, EnglishAnalyzer.getDefaultStopSet());
         filter = new PorterStemFilter(filter);
