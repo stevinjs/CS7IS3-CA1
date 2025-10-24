@@ -24,13 +24,12 @@ public class CustomAnalyzer extends Analyzer {
 
         // Extend standard stopwords with science-specific noise words
         CharArraySet stopSet = new CharArraySet(EnglishAnalyzer.getDefaultStopSet(), true);
-stopSet.addAll(Arrays.asList("et", "al", "study", "results", "based", "shown"));
+        stopSet.addAll(Arrays.asList("et", "al", "study", "results", "based", "shown"));
 
         filter = new StopFilter(filter, stopSet);
 
         filter = new PorterStemFilter(filter);
         filter = new ASCIIFoldingFilter(filter);
-        filter = new LengthFilter(filter, 3, Integer.MAX_VALUE); // Only remove <3 chars
 
         return new TokenStreamComponents(source, filter);
     }
