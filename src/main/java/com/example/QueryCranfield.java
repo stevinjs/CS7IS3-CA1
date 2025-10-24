@@ -17,18 +17,21 @@ import java.nio.file.Paths;
 
 public class QueryCranfield {
     public static void main(String[] args) throws Exception {
-        if (args.length < 4) {
-            System.err.println("Usage: java QueryCranfield <analyzer> <indexDir> <resultsFile> <cran.qry>");
+        if (args.length < 5) {
+            System.err.println("Usage: java QueryCranfield <analyzer> <indexDir> <resultsFile> <cran.qry> <similarityMode>");
             System.exit(1);
         }
         String analyzerType = args[0];
         String indexDir = args[1];
         String outputPath = args[2];
         String queriesPath = args[3];
+        String similarityMode = args[4];
         Analyzer analyzer = getAnalyzer(analyzerType);
 
         IndexReader reader = DirectoryReader.open(FSDirectory.open(Paths.get(indexDir)));
         IndexSearcher searcher = new IndexSearcher(reader);
+        Similarity similarity = getSimilarity(similarityMode);
+        searcher.setSimilarity(similarity);
         QueryParser parser = new QueryParser("content", analyzer);
 
         BufferedReader br = new BufferedReader(new FileReader(queriesPath));
@@ -64,6 +67,7 @@ public class QueryCranfield {
             case "standard": return new StandardAnalyzer();
             case "simple": return new SimpleAnalyzer();
             case "whitespace": return new WhitespaceAnalyzer();
+            case "custom": return new CustomAnalyzer();
             default: return new StandardAnalyzer();
         }
     }
@@ -80,4 +84,19 @@ public class QueryCranfield {
             writer.write(String.format("%d Q0 %s %d %.4f STANDARD\n", queryId, origDocId, rank + 1, score));
         }
     }
+
+    private static Similarity getSimilarity(String mode) {
+    switch (mode.toLowerCase()) {
+        case "bm25":
+            return new BM25Similarity();
+        case "classic":
+            return new ClassicSimilarity(); // Lucene's legacy TF-IDF
+        case "boolean":
+            return new BooleanSimilarity();
+        default:
+            // Fallback to BM25 if unknown
+            System.out.println("Unknown similarity '" + mode + "'; using BM25.");
+            return new BM25Similarity();
+    }
+}
 }

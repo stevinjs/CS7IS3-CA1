@@ -14,16 +14,33 @@ import java.nio.file.Paths;
 
 public class Indexer {
     public static void main(String[] args) throws Exception {
-        if (args.length < 3) {
-            System.err.println("Usage: java Indexer <analyzer> <indexDir> <cran.all.1400>");
+        if (args.length < 4) {
+            System.err.println("Usage: java Indexer <analyzer> <indexDir> <cran.all.1400> <similarityMode>");
             System.exit(1);
         }
         String analyzerType = args[0];
         String indexDir = args[1];
         String cranPath = args[2];
+        String similarityMode = args[3];
         Analyzer analyzer = getAnalyzer(analyzerType);
 
         IndexWriterConfig config = new IndexWriterConfig(analyzer);
+        // Set similarity based on mode
+        switch (similarityMode.toLowerCase()) {
+            case "bm25":
+                config.setSimilarity(new BM25Similarity());
+                break;
+            case "classic":
+                config.setSimilarity(new ClassicSimilarity());
+                break;
+            case "boolean":
+                config.setSimilarity(new BooleanSimilarity());
+                break;
+            default:
+                config.setSimilarity(new BM25Similarity());
+                break;
+        }
+        
         IndexWriter writer = new IndexWriter(FSDirectory.open(Paths.get(indexDir)), config);
 
         BufferedReader br = new BufferedReader(new FileReader(cranPath));
