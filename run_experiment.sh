@@ -7,15 +7,15 @@ CRAN_QREL="./resources/qrel"
 TREC_EVAL="./trec_eval-9.0.7/trec_eval" # Adjust if trec_eval binary elsewhere
 
 # List analyzers (must match your Java switch statement)
-ANALYZERS=(standard english simple whitespace)
+ANALYZERS=(standard english simple whitespace custom)
 MODES=(bm25 classic boolean)
 
 for ANALYZER in "${ANALYZERS[@]}"; do
     for MODE in "${MODES[@]}"; do
         echo "==== Testing Analyzer: $ANALYZER with Similarity: $MODE ===="
         INDEX_DIR="./indexes/index_${ANALYZER}_$MODE"
-        RESULTS="results_${ANALYZER}_$MODE.txt"
-        METRICS="metrics_${ANALYZER}_$MODE.txt"
+        RESULTS="./results/results_${ANALYZER}_$MODE.txt"
+        METRICS="./metrics/metrics_${ANALYZER}_$MODE.txt"
 
         # (Re-)Index documents using selected analyzer
         mvn exec:java -Dexec.mainClass="com.example.Indexer" -Dexec.args="$ANALYZER $INDEX_DIR $CRAN_DOCS $MODE"
