@@ -23,12 +23,8 @@ public class CustomAnalyzer extends Analyzer {
         filter = new EnglishPossessiveFilter(filter);
 
         // Extend standard stopwords with science-specific noise words
-        Set<?> extraStopwords = new CharArraySet(
-            Arrays.asList("et", "al", "study", "results", "based", "shown"), true);
-
-        CharArraySet stopSet = CharArraySet.unmodifiableSet(
-            CharArraySet.copy(EnglishAnalyzer.getDefaultStopSet()));
-        stopSet.addAll(extraStopwords);
+        CharArraySet stopSet = new CharArraySet(EnglishAnalyzer.getDefaultStopSet(), true);
+stopSet.addAll(Arrays.asList("et", "al", "study", "results", "based", "shown"));
 
         filter = new StopFilter(filter, stopSet);
 
