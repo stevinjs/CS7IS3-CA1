@@ -7,7 +7,7 @@ CRAN_QREL="./resources/qrel"
 TREC_EVAL="./trec_eval-9.0.7/trec_eval" # Adjust if trec_eval binary elsewhere
 
 # List analyzers (must match your Java switch statement)
-ANALYZERS=(standard english simple whitespace custom)
+ANALYZERS=(custom)
 MODES=(bm25 classic boolean)
 
 for ANALYZER in "${ANALYZERS[@]}"; do
