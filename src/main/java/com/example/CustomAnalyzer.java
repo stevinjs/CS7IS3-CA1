@@ -26,10 +26,10 @@ public class CustomAnalyzer extends Analyzer {
         CharArraySet stopSet = new CharArraySet(EnglishAnalyzer.getDefaultStopSet(), true);
         stopSet.addAll(Arrays.asList("et", "al", "study", "results", "based", "shown"));
 
-        filter = new StopFilter(filter, stopSet);
-
+        filter = new EnglishPossessiveFilter(filter);
+        filter = new StopFilter(filter, EnglishAnalyzer.getDefaultStopSet());
         filter = new PorterStemFilter(filter);
-        filter = new ASCIIFoldingFilter(filter);
+        // filter = new ASCIIFoldingFilter(filter); // Optional, may not matter for Cranfield
 
         return new TokenStreamComponents(source, filter);
     }
